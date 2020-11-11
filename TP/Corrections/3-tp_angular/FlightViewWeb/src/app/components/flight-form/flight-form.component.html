@@ -1,0 +1,54 @@
+<form [formGroup]="flightForm" (ngSubmit)="onSubmit(flightForm.value)">
+
+  <div>
+    <label for="flightNumber">
+      Flight Number
+    </label>
+    <input id="flightNumber" type="number" formControlName="flightNumber">
+  </div>
+
+  <div>
+    <label for="departureAirportCode">
+      Departure Airport Code
+    </label>
+    <input id="departureAirportCode" type="text" formControlName="departureAirportCode">
+  </div>
+
+  <div>
+    <label for="arrivalAirportCode">
+      Arrival Airport Code
+    </label>
+    <input id="arrivalAirportCode" type="text" formControlName="arrivalAirportCode">
+  </div>
+
+  <div>
+    <label for="dateAndTimeOfDeparture">
+      Date And Time Of Departure
+    </label>
+    <input id="dateAndTimeOfDeparture" type="datetime" formControlName="dateAndTimeOfDeparture">
+  </div>
+
+  <div>
+    <label for="dateAndTimeOfArrival">
+      Date And Time Of Arrival
+    </label>
+    <input id="dateAndTimeOfArrival" type="datetime" formControlName="dateAndTimeOfArrival">
+  </div>
+
+  <div>
+    <label for="delay">
+      Delay
+    </label>
+    <input id="delay" type="checkbox" formControlName="delay">
+  </div>
+
+  <div>
+    <label for="price">
+      Price
+    </label>
+    <input id="price" type="number" formControlName="price">
+  </div>
+
+  <button class="button" type="submit">Add to list</button>
+
+</form>

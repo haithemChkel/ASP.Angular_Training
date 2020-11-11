@@ -64,7 +64,7 @@ TP Angular n°7 – Formulaires
 ---------------------------------------------------------------------------------------------------------------
 
 Créer un composant VolFormComponent permettant d’ajouter un vol dans le tableau géré par le service
--	Y implémenter un formulaire piloté par le code  Afficher ce composant dans le composant VolsListComponent
+-	Y implémenter un formulaire piloté par le code(Reactive forms)  Afficher ce composant dans le composant VolsListComponent
 
 
 ---------------------------------------------------------------------------------------------------------------

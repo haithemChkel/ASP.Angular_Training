@@ -7,7 +7,7 @@ import { Flight } from '../models';
 })
 export class FlightService {
 
-  flights$: Observable<Flight[]>;
+  flights$: BehaviorSubject<Flight[]>;
 
   constructor() {
     const keys = Array(1000).keys();
@@ -25,6 +25,10 @@ export class FlightService {
         };
       }
     );
-    this.flights$ = new BehaviorSubject<Flight[]>(flights);
-   }
+    this.flights$ = new BehaviorSubject<Flight[]>(flights.sort((a, b) => b.id - a.id ));
+  }
+
+  addFlight(flight: Flight): void {
+    this.flights$.next([{ id: Math.max(...this.flights$.value.map(x => x.id)) + 1, ...flight }, ...this.flights$.value]);
+  }
 }

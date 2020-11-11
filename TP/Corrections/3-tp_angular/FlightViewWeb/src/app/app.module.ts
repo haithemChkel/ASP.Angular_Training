@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { FlightListComponent } from './components/flight-list/flight-list.component';
 import { FlightItemComponent } from './components/flight-item/flight-item.component';
 import { FlightDetailsComponent } from './components/flight-details/flight-details.component';
+import { FlightFormComponent } from './components/flight-form/flight-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,11 @@ import { FlightDetailsComponent } from './components/flight-details/flight-detai
     FlightListComponent,
     FlightItemComponent,
     FlightDetailsComponent,
+    FlightFormComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

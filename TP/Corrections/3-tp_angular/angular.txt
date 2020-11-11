@@ -86,8 +86,8 @@ Corrections =>
 TP Angular n°7 – Formulaires
 ---------------------------------------------------------------------------------------------------------------
 
-Créer un composant VolFormComponent permettant d’ajouter un vol dans le tableau géré par le service
--	Y implémenter un formulaire ,  Afficher ce composant dans le composant FlightListComponent
+Créer un composant FlightFormComponent permettant d’ajouter un vol dans le tableau géré par le service
+-	Y implémenter un formulaire piloté par le code(Reactive forms)  Afficher ce composant dans le composant VolsListComponent
 
 ---------------------------------------------------------------------------------------------------------------
 TP Angular n°8 – Routing
@@ -95,7 +95,7 @@ TP Angular n°8 – Routing
 
 Configurer le module de routing avec 3 routes :
 - Une route /vols affichant la liste des vols (composant FlightListComponent)
-- Une route /add permettant d’ajouter un vol (composant VolFormComponent)
+- Une route /add permettant d’ajouter un vol (composant FlightFormComponent)
 - Une route paramétrée /vol/ :id permettant d’afficher un vol particulier (composant FlightItemComponent)
 
 Modifier le projet pour y ajouter une barre de navigation avec 2 menus
