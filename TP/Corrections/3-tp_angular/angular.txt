@@ -78,15 +78,16 @@ Grâce à un système d’Output, faire en sorte que FlightListComponent utilise
 TP Angular n°6 – Services
 ---------------------------------------------------------------------------------------------------------------
 
-Exporter la liste des vols dans un service VolService
+Exporter la liste des vols dans un service FlightService
+Corrections => 
+                ng g service ./services/Flight 
 
 ---------------------------------------------------------------------------------------------------------------
 TP Angular n°7 – Formulaires
 ---------------------------------------------------------------------------------------------------------------
 
 Créer un composant VolFormComponent permettant d’ajouter un vol dans le tableau géré par le service
--	Y implémenter un formulaire piloté par le code  Afficher ce composant dans le composant FlightListComponent
-
+-	Y implémenter un formulaire ,  Afficher ce composant dans le composant FlightListComponent
 
 ---------------------------------------------------------------------------------------------------------------
 TP Angular n°8 – Routing
@@ -106,5 +107,5 @@ Modifier le bouton « Détails » afin d’aller vers la route paramétrée
 ---------------------------------------------------------------------------------------------------------------
 TP Angular n°9 – HTTP
 ---------------------------------------------------------------------------------------------------------------
-Modifier le service VolService afin que ce dernier puisse exploiter une API REST
+Modifier le service FlightService afin que ce dernier puisse exploiter une API REST
 Modifier les composants en conséquence
