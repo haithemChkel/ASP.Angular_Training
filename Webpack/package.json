@@ -1,0 +1,27 @@
+{
+  "name": "black_project_with_webpack",
+  "version": "1.0.0",
+  "description": "Blank project with webpack",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack --mode production",
+    "watch": "npx webpack --watch --mode development"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "css-loader": "^5.0.1",
+    "node-sass": "^5.0.0",
+    "postcss-loader": "^4.0.4",
+    "sass-loader": "^10.0.5",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
+}

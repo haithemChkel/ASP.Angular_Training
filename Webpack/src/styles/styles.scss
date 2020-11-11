@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+$theme-colors: (
+    "primary":    #262087,
+    "secondary":  #97E2ED,
+    "success":    #20875A,
+    "danger":     #BA196A,
+    "light":      #EBE6E1,
+    "dark":       #333
+);
+
+body{
+    // background: url('../images/texture.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+h1{
+    color : theme-color('primary');
+}
