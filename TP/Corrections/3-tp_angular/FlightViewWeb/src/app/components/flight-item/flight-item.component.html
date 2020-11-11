@@ -1,8 +1,6 @@
-<div>Id : {{flight.id}}</div>
-<div>Flight number : {{flight.flightNumber}}</div>
-<div>Departure airport code : {{flight.departureAirportCode}}</div>
-<div> Arrival airport code : {{flight.arrivalAirportCode}}</div>
-<div>Date and time of departure : {{flight.dateAndTimeOfDeparture | date:'full':'+0200':'fr'}}</div>
-<div>Date and time of arrival : {{flight.dateAndTimeOfArrival | date:'full':'+0200':'fr'}}</div>
-<div>Delay : {{flight.delay}}</div>
-<div>Price : {{flight.price}}</div>
+<div (click)="this.itemSelected($event)">
+  <div class="field">{{flight.id}}</div>
+  <div class="field">{{flight.flightNumber}}</div>
+  <div class="field">{{flight.departureAirportCode}}</div>
+  <div class="field">{{flight.arrivalAirportCode}}</div>
+</div>

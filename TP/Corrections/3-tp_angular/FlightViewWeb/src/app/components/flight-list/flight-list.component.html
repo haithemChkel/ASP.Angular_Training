@@ -1,3 +1,14 @@
-<div *ngFor="let flight of this.flights" class="flight-container" [ngClass]="{'flight-with-delay' : flight.delay}">
-  <app-flight-item [flight]="flight"></app-flight-item>
+<div class="flight-list-header">
+  <div class="field">Id</div>
+  <div class="field">Flight number</div>
+  <div class="field">Departure airport code</div>
+  <div class="field">Arrival airport code</div>
+</div>
+<div class="flight-list">
+  <div *ngFor="let flight of this.flights" class="flight-container" [ngClass]="{'flight-with-delay' : flight.delay}">
+    <app-flight-item [flight]="flight" (selected)="this.onSelectedFlight($event)"></app-flight-item>
+  </div>
+</div>
+<div class="flight-details" *ngIf="selectedFlight">
+  <app-flight-details [flight]="selectedFlight"></app-flight-details>
 </div>

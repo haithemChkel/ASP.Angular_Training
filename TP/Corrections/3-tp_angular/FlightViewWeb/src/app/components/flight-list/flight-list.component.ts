@@ -10,60 +10,27 @@ export class FlightListComponent implements OnInit {
 
   flights: Flight[];
 
-  constructor() { }
+  selectedFlight: Flight;
 
   ngOnInit(): void {
-    this.flights = [
-      {
-        id: 1,
-        flightNumber: 'XGR1233',
-        departureAirportCode: 'ORLYS',
-        arrivalAirportCode: 'MRGGH',
-        dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-        dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-        delay: false,
-        price: 500
-      },
-      {
-        id: 2,
-        flightNumber: 'FRTTF1233',
-        departureAirportCode: 'ORLYS',
-        arrivalAirportCode: 'CCVFFR',
-        dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-        dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-        delay: true,
-        price: 700
-      },
-      {
-        id: 3,
-        flightNumber: 'FFGTGCDD',
-        departureAirportCode: 'GTYLK',
-        arrivalAirportCode: 'XSZEVFD',
-        dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-        dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-        delay: false,
-        price: 1200
-      },
-      {
-        id: 3,
-        flightNumber: 'XX53268',
-        departureAirportCode: 'FGFGHF',
-        arrivalAirportCode: 'HFGHDGFH',
-        dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-        dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-        delay: true,
-        price: 1200
-      },
-      {
-        id: 3,
-        flightNumber: 'FFGTGCDD',
-        departureAirportCode: 'GTYLK',
-        arrivalAirportCode: 'XSZEVFD',
-        dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-        dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-        delay: false,
-        price: 1200
+    const keys = Array(1000).keys();
+    this.flights = [...Array.from(keys)].map(
+      i => {
+        return {
+          id: i,
+          flightNumber: `AERO${Math.floor(Math.random() * Math.floor(200))}`,
+          departureAirportCode: Math.random().toString(36).substring(7).toUpperCase(),
+          arrivalAirportCode: Math.random().toString(36).substring(7).toUpperCase(),
+          dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
+          dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
+          delay: Math.floor(Math.random() * Math.floor(3000)) % 2 === 0,
+          price: Math.floor(Math.random() * Math.floor(3000))
+        };
       }
-    ];
+    );
+  }
+
+  onSelectedFlight(flight: Flight): void {
+    this.selectedFlight = flight;
   }
 }
