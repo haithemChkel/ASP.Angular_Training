@@ -103,6 +103,8 @@ Modifier le projet pour y ajouter une barre de navigation avec 2 menus
 - Ajouter un vol
 Modifier le bouton « Détails » afin d’aller vers la route paramétrée
 
+Corrections => 
+                ng g module AppRouting
 
 ---------------------------------------------------------------------------------------------------------------
 TP Angular n°9 – HTTP

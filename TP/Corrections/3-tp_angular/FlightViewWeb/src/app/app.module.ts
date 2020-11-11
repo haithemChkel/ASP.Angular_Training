@@ -7,6 +7,7 @@ import { FlightItemComponent } from './components/flight-item/flight-item.compon
 import { FlightDetailsComponent } from './components/flight-details/flight-details.component';
 import { FlightFormComponent } from './components/flight-form/flight-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, first, map, single } from 'rxjs/operators';
 import { Flight } from '../models';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class FlightService {
   flights$: BehaviorSubject<Flight[]>;
 
   constructor() {
-    const keys = Array(1000).keys();
+    const keys = Array(100).keys();
     const flights = [...Array.from(keys)].map(
       i => {
         return {
@@ -25,10 +26,20 @@ export class FlightService {
         };
       }
     );
-    this.flights$ = new BehaviorSubject<Flight[]>(flights.sort((a, b) => b.id - a.id ));
+    this.flights$ = new BehaviorSubject<Flight[]>(flights.sort((a, b) => b.id - a.id));
   }
 
   addFlight(flight: Flight): void {
-    this.flights$.next([{ id: Math.max(...this.flights$.value.map(x => x.id)) + 1, ...flight }, ...this.flights$.value]);
+    if (!flight.id) {
+      this.flights$.next([{ id: Math.max(...this.flights$.value.map(x => x.id)) + 1, ...flight }, ...this.flights$.value]);
+    }
+    else {
+      this.flights$.next([flight, ...this.flights$.value.filter(x => x.id !== flight.id)].sort((a, b) => b.id - a.id));
+    }
+  }
+
+
+  getFlightById(flightId: number): Observable<Flight> {
+    return this.flights$.pipe(map(x => x.find(f => f.id = flightId)));
   }
 }

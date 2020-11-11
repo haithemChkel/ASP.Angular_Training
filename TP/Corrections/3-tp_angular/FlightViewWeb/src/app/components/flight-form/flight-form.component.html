@@ -1,10 +1,10 @@
-<form [formGroup]="flightForm" (ngSubmit)="onSubmit(flightForm.value)">
+<form [formGroup]="flightForm" (ngSubmit)="onSubmit(flightForm.value)" *ngIf="this.vm$ | async as vm">
 
   <div>
     <label for="flightNumber">
       Flight Number
     </label>
-    <input id="flightNumber" type="number" formControlName="flightNumber">
+    <input id="flightNumber" type="text" formControlName="flightNumber">
   </div>
 
   <div>
@@ -49,6 +49,6 @@
     <input id="price" type="number" formControlName="price">
   </div>
 
-  <button class="button" type="submit">Add to list</button>
+  <button class="button" type="submit">Save</button>
 
 </form>

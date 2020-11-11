@@ -1,5 +1,14 @@
 <table>
   <tr>
+    <td><strong>Id :</strong> {{flight?.id}}
+    </td>
+    <td><strong>Flight number : </strong>{{flight?.flightNumber }}</td>
+  </tr>
+  <tr>
+    <td><strong>Departure airport code :</strong> {{flight?.departureAirportCode }}</td>
+    <td><strong>Arrival airport code : </strong>{{flight?.arrivalAirportCode}}</td>
+  </tr>
+  <tr>
     <td><strong>Date and time of departure :</strong> {{flight?.dateAndTimeOfDeparture | date:'full':undefined:'fr'}}
     </td>
     <td><strong>Date and time of arrival : </strong>{{flight?.dateAndTimeOfArrival | date:'full':undefined:'fr'}}</td>
@@ -7,5 +16,10 @@
   <tr>
     <td><strong>Delay : </strong>{{flight?.delay}}</td>
     <td><strong>Price : </strong>{{flight?.price | currency: 'EUR': undefined:undefined: 'fr' }}</td>
+  </tr>
+  <tr>
+    <td><a [routerLink]="['/edit', flight.id]">
+        Edit
+      </a></td>
   </tr>
 </table>

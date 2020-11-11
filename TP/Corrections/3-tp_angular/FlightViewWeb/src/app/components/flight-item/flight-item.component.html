@@ -1,6 +1,12 @@
-<div (click)="this.itemSelected($event)">
-  <div class="field">{{flight.id}}</div>
+<div>
+  <div class="field">
+    <a [routerLink]="['/flight', flight.id]">
+      {{ flight.id }}
+    </a></div>
   <div class="field">{{flight.flightNumber}}</div>
   <div class="field">{{flight.departureAirportCode}}</div>
   <div class="field">{{flight.arrivalAirportCode}}</div>
+  <div class="field">
+    <button class="button" (click)="this.itemSelected($event)">Details</button>
+  </div>
 </div>

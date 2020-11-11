@@ -1,6 +1,3 @@
-<div>
-  <app-flight-form></app-flight-form>
-</div>
 <div class="flight-list-header">
   <div class="field">Id</div>
   <div class="field">Flight number</div>
@@ -11,7 +8,4 @@
   <div *ngFor="let flight of this.flights$ | async" class="flight-container" [ngClass]="{'flight-with-delay' : flight.delay}">
     <app-flight-item [flight]="flight" (selected)="this.onSelectedFlight($event)"></app-flight-item>
   </div>
-</div>
-<div class="flight-details" *ngIf="selectedFlight">
-  <app-flight-details [flight]="selectedFlight"></app-flight-details>
 </div>
