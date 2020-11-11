@@ -94,9 +94,9 @@ TP Angular n°8 – Routing
 ---------------------------------------------------------------------------------------------------------------
 
 Configurer le module de routing avec 3 routes :
-- Une route /vols affichant la liste des vols (composant FlightListComponent)
+- Une route /flights affichant la liste des vols (composant FlightListComponent)
 - Une route /add permettant d’ajouter un vol (composant FlightFormComponent)
-- Une route paramétrée /vol/ :id permettant d’afficher un vol particulier (composant FlightItemComponent)
+- Une route paramétrée /flight/ :id permettant d’afficher un vol particulier (composant FlightItemComponent)
 
 Modifier le projet pour y ajouter une barre de navigation avec 2 menus
 - Voir les vols
