@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>ES6 News</h2>
+
+    <p id="demo"></p>
+
+    <script>
+
+        // ****** JavaScript let ******
+        // ****** ES5 ******
+
+        function calculateVar(n1, n2, op) {
+            if (op === '+')
+                var res = n1 + n2;
+            else if (op === '-')
+                var res = n1 - n2
+
+            return res;
+        }
+        // ****** ES6 ******
+        function calculateLet(n1, n2, op) {
+            let res2;
+            if (op === '+') {
+                res2 = n1 + n2;
+            }
+            else if (op === '-') {
+                res2 = n1 - n2;
+            }
+            return res2;
+        }
+
+        console.log('calculateVar =>' + calculateVar(5, 3, '+'));
+        console.log('calculateLet =>' + calculateLet(5, 3, '+'));
+
+        // --------------------------------------------------------------------------------------------------------------------------------------------
+
+        // ****** JavaScript const ******
+        // ****** ES5 ******
+        var x_es5 = 10;
+
+        // ****** ES6 ******
+        const x_es6 = 10;
+        // --------------------------------------------------------------------------------------------------------------------------------------------
+
+        // ****** JavaScript Arrow Functions ******
+        // ****** ES5 ******
+        var add_es5 = function (x, y) {
+            return x + y;
+        }
+
+        // ****** ES6 ******
+        const add_es6 = (x, y) => x + y; // const !!
+
+        console.log('add_es6 =>' + add_es6(9, 2));
+
+        // --------------------------------------------------------------------------------------------------------------------------------------------
+        // ****** JavaScript The Symbol Type ******
+        // https://javascript.info/symbol
+        // Using Symbol() to create a unique identifiers, “Hidden” properties
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            age: 50,
+            eyeColor: "blue"
+        };
+
+        let id = Symbol('id');
+        person[id] = 140353;
+
+        console.log('Symbol id =>' + id.description);
+        console.log('person id =>' + person.id);
+        console.log(`person['id'] =>` + person['id']);
+        console.log('person[id] =>' + person[id]);
+
+        //  Symbols in an object literal
+        {
+            let id = Symbol("id");
+
+            let user = {
+                name: "John",
+                [id]: 123 // not "id": 123
+            };
+
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------------
+
+        // ****** JavaScript Template de string ******
+        // ****** ES5 ******
+        {
+            let nomComplet = 'Mr ' + prenom + ' ' + nom;
+        }
+
+        // ****** ES6 ******
+        {
+            let nomComplet = `Mr ${prenom} ${nom}`;
+        }
+
+    </script>
+
+</body>
+
+</html>
