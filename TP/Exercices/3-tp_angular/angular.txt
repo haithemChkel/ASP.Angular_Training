@@ -1,0 +1,89 @@
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°1 – Création d’une application
+---------------------------------------------------------------------------------------------------------------
+
+Installer sur la machine les outils nécessaires, en particulier AngularCLI 
+et créer une application « FlightViewWeb ».
+Choisir le mode de styles SCSS
+Ne pas utiliser le module router
+Tester l’application pour s’assurer que tout est bon.
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°2 – Création de composants
+---------------------------------------------------------------------------------------------------------------
+
+* Sur la base du TP Angular 1, implémenter dans le projet une interface Vol contenant les attributs suivants :
+Id : number
+Numéro de vol : string
+Code de l’aéroport de départ : string
+Code de l’aéroport d’arrivée : string
+Date et heure de départ : Date
+Date et heure d’arrivée : Date
+Retard : boolean
+Prix : number
+
+* Créer un composant VolsListComponent
+-Y créer comme attribut un tableau de type Vol[]
+-Afficher la liste des vols (1 div par vol) avec son numéro et les codes des aéroports
+-Changer le style d’un élément de la div (par exemple sa couleur de fond) 
+    lorsque le vol a son attribut Retard à true
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°3 – Utilisation des pipes
+---------------------------------------------------------------------------------------------------------------
+
+Utiliser les pipes pour ajouter les dates et heures au format français
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°4 – Création de composants (suite)
+---------------------------------------------------------------------------------------------------------------
+
+Plutôt que d’avoir un composant VolsListComponent qui fasse tout, on souhaite plutôt avoir un composant VolsListComponent
+qui utilise un composant VolComponent pour chaque vol à afficher
+Modifier le TP Angular pour répondre à cette problématique :
+- Créer le composant VolComponent et l’implémenter
+- Modifier le composant VolsListComponent en conséquence
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°5 – Création de composants (suite)
+---------------------------------------------------------------------------------------------------------------
+
+Créer un composant VolDetailsComponent affichant toutes les informations d’un vol (dont le prix en euros) transmis en entrée
+Ajouter à VolComponent un bouton « Détails »
+Grâce à un système d’Output, faire en sorte que VolsListComponent utilise VolDetailsComponent pour afficher le vol choisi
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°6 – Services
+---------------------------------------------------------------------------------------------------------------
+
+Exporter la liste des vols dans un service VolService
+
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°7 – Formulaires
+---------------------------------------------------------------------------------------------------------------
+
+Créer un composant VolFormComponent permettant d’ajouter un vol dans le tableau géré par le service
+-	Y implémenter un formulaire piloté par le code  Afficher ce composant dans le composant VolsListComponent
+
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°8 – Routing
+---------------------------------------------------------------------------------------------------------------
+
+Configurer le module de routing avec 3 routes :
+- Une route /vols affichant la liste des vols (composant VolsListComponent)
+- Une route /add permettant d’ajouter un vol (composant VolFormComponent)
+- Une route paramétrée /vol/ :id permettant d’afficher un vol particulier (composant VolDetailsComponent)
+
+Modifier le projet pour y ajouter une barre de navigation avec 2 menus
+- Voir les vols
+- Ajouter un vol
+Modifier le bouton « Détails » afin d’aller vers la route paramétrée
+
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°9 – HTTP
+---------------------------------------------------------------------------------------------------------------
+Modifier le service VolService afin que ce dernier puisse exploiter une API REST
+Modifier les composants en conséquence

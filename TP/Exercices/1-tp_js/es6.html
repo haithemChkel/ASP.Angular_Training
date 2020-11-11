@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <h2>transformer en utilisant au maximum les nouveautés d’ES6</h2>
+
+  <p id="demo"></p>
+
+  <script>
+    function getCategorie(age) {
+      if (age >= 18) {
+        var categorie = "Majeur";
+      } else {
+        var categorie = "Mineur";
+      }
+
+      var resultat = "La personne est " + categorie;
+      return resultat;
+    }
+
+    var resultat = getCategorie(19);
+    console.log(resultat);
+
+    function processAnnee(annee, cb) {
+      var age = new Date().getFullYear() - annee; return cb(age);
+    }
+
+    processAnnee(1990, function (age) {
+      console.log("Tu as " + age + " ans");
+    })
+
+  </script>
+
+</body>
+
+</html>
