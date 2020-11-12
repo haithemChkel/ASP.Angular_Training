@@ -2,13 +2,7 @@
 // Reprendre le code ES6 du TP précédent et l’écrire en TypeScript
 // Installer typescript sur la machine et compiler le script TypeScript en script JavaScript
 var getCategorie = function (age) {
-    var categorie;
-    if (age >= 18) {
-        categorie = "Majeur";
-    }
-    else {
-        categorie = "Mineur";
-    }
+    var categorie = (age >= 18) ? 'Majeur' : 'Mineur';
     return "La personne est " + categorie;
 };
 document.getElementById("demo1").innerHTML = getCategorie(19);

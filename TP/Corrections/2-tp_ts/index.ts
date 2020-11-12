@@ -2,12 +2,7 @@
 // Installer typescript sur la machine et compiler le script TypeScript en script JavaScript
 
 const getCategorie = (age: number) => {
-  let categorie: string;
-  if (age >= 18) {
-    categorie = "Majeur";
-  } else {
-    categorie = "Mineur";
-  }
+  const categorie = (age >= 18) ? 'Majeur' : 'Mineur';
   return `La personne est ${categorie}`;
 }
 
