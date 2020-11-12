@@ -9,6 +9,7 @@ import { FlightFormComponent } from './components/flight-form/flight-form.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     FlightItemComponent,
     FlightDetailsComponent,
     FlightFormComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
