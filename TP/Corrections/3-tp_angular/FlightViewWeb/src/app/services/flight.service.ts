@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, first, map, single } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Flight } from '../models';
 
 @Injectable({
@@ -8,38 +10,28 @@ import { Flight } from '../models';
 })
 export class FlightService {
 
-  flights$: BehaviorSubject<Flight[]>;
+  private readonly apiUrl = environment.apiUrl;
+  constructor(private readonly http: HttpClient) { }
 
-  constructor() {
-    const keys = Array(100).keys();
-    const flights = [...Array.from(keys)].map(
-      i => {
-        return {
-          id: i,
-          flightNumber: `AERO${Math.floor(Math.random() * Math.floor(200))}`,
-          departureAirportCode: Math.random().toString(36).substring(7).toUpperCase(),
-          arrivalAirportCode: Math.random().toString(36).substring(7).toUpperCase(),
-          dateAndTimeOfDeparture: new Date(2020, 11, 16, 17, 23, 42, 11),
-          dateAndTimeOfArrival: new Date(2020, 11, 17, 5, 23, 42, 11),
-          delay: Math.floor(Math.random() * Math.floor(3000)) % 2 === 0,
-          price: Math.floor(Math.random() * Math.floor(3000))
-        };
-      }
-    );
-    this.flights$ = new BehaviorSubject<Flight[]>(flights.sort((a, b) => b.id - a.id));
+  findAll(): Observable<Flight[]> {
+    return this.http.get<Flight[]>(this.apiUrl);
   }
 
-  addFlight(flight: Flight): void {
-    if (!flight.id) {
-      this.flights$.next([{ id: Math.max(...this.flights$.value.map(x => x.id)) + 1, ...flight }, ...this.flights$.value]);
-    }
-    else {
-      this.flights$.next([flight, ...this.flights$.value.filter(x => x.id !== flight.id)].sort((a, b) => b.id - a.id));
-    }
+  findOne(flightId: number): Observable<Flight> {
+    console.log('call : ', this.apiUrl);
+    return this.http.get<Flight>(`${this.apiUrl}/${flightId}`);
   }
 
+  create(flight: Flight): Observable<number> {
+    console.log('call create with :', flight);
+    return this.http.post<number>(`${this.apiUrl}`, flight);
+  }
 
-  getFlightById(flightId: number): Observable<Flight> {
-    return this.flights$.pipe(map(x => x.find(f => f.id = flightId)));
+  update(flight: Flight): Observable<Flight> {
+    return this.http.put<Flight>(`${this.apiUrl}/${flight.id}`, flight);
+  }
+
+  delete(flightId: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiUrl}/${flightId}`);
   }
 }

@@ -21,7 +21,7 @@ export class FlightDetailsComponent implements OnInit, OnDestroy {
     this.sub = this.route.params
       .pipe(
        map(params => +params.id),
-       switchMap(id => this.flightService.getFlightById(id))
+       switchMap(id => this.flightService.findOne(id))
        ).subscribe(f => {
          this.flight = f;
         });

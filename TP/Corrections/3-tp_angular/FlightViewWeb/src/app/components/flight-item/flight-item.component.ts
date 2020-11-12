@@ -10,13 +10,18 @@ export class FlightItemComponent implements OnInit {
 
   @Input() flight: Flight;
   @Output() selected = new EventEmitter<Flight>();
+  @Output() delete = new EventEmitter<Flight>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  itemSelected(event): void {
+  onItemSelected(event): void {
     this.selected.emit(this.flight);
+  }
+
+  onDelete(event): void {
+    this.delete.emit(this.flight);
   }
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Flight } from 'src/app/models/flight';
 import { FlightService } from 'src/app/services';
 
@@ -13,16 +13,23 @@ import { FlightService } from 'src/app/services';
 })
 export class FlightListComponent implements OnInit {
 
-  flights$: Observable<Flight[]>;
+  flights$ = new BehaviorSubject<Flight[]>([]);
   selectedFlight: Flight;
 
   constructor(private readonly flightService: FlightService, private readonly router: Router) { }
-  ngOnInit(): void {
-    this.flights$ = this.flightService.flights$;
+  async ngOnInit(): Promise<void> {
+    await this.flightService.findAll().pipe(
+      tap(x => this.flights$.next(x))
+    ).toPromise();
   }
 
   onSelectedFlight(flight: Flight): void {
     this.selectedFlight = flight;
     this.router.navigate(['/flight', flight.id]);
+  }
+
+  async onDeleteFlight(flight: Flight): Promise<void> {
+    await this.flightService.delete(flight.id).toPromise();
+    this.flights$.next(this.flights$.value.filter(x => x.id !== flight.id));
   }
 }

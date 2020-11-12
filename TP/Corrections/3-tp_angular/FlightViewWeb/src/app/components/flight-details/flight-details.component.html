@@ -18,7 +18,7 @@
     <td><strong>Price : </strong>{{flight?.price | currency: 'EUR': undefined:undefined: 'fr' }}</td>
   </tr>
   <tr>
-    <td><a [routerLink]="['/edit', flight.id]">
+    <td><a [routerLink]="['/edit', flight?.id]">
         Edit
       </a></td>
   </tr>

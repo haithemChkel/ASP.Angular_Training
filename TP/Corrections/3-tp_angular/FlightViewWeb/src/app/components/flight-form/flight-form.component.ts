@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { Flight } from 'src/app/models';
 import { FlightService } from 'src/app/services';
@@ -13,7 +13,6 @@ import { FlightService } from 'src/app/services';
 })
 export class FlightFormComponent implements OnInit {
   flightForm: FormGroup;
-  private sub: Subscription;
   vm$: Observable<any>;
 
   constructor(
@@ -37,16 +36,23 @@ export class FlightFormComponent implements OnInit {
     this.vm$ = this.route.params
       .pipe(
         map(params => +params.id),
-        switchMap(id => this.flightService.getFlightById(id)),
+        switchMap(id => Number.isInteger(id) ? this.flightService.findOne(id) : of(true)),
         tap(f => {
-          this.flightForm.setValue(f);
+          if (f && f.id) {
+            this.flightForm.setValue(f);
+          }
         })
       );
   }
 
-  onSubmit(flight: Flight): void {
+  async onSubmit(flight: Flight): Promise<any> {
     if (this.flightForm.valid) {
-      this.flightService.addFlight(flight);
+      if (flight.id) {
+        await this.flightService.update(flight).toPromise();
+      } else {
+        await this.flightService.create(flight).toPromise();
+      }
+      console.log('Go to flights');
       this.router.navigate(['/flights']);
     } else {
       alert(this.flightForm.status + 'form');
