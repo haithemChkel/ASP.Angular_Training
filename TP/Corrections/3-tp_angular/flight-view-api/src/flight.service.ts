@@ -41,7 +41,8 @@ export class FlightService {
 
   create(flight: Flight): number {
     const newId = Math.max(...this.flights.keys()) + 1;
-    this.flights.set(newId, { id: newId, ...flight });
+    flight.id = Number.isInteger(newId) && newId > 0 ?  newId : 1;
+    this.flights.set(newId, flight);
     return newId;
   }
 
@@ -52,6 +53,5 @@ export class FlightService {
 
   delete(flightId: number): boolean {
     return this.flights.delete(flightId);
-    return true;
   }
 }

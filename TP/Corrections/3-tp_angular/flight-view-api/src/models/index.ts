@@ -1,1 +1,1 @@
-export * from '../../../FlightViewWeb/src/app/models';
+export * from './flight';

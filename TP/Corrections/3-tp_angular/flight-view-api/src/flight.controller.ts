@@ -13,11 +13,12 @@ export class FlightController {
 
   @Get(':id')
   findOne(@Param('id') id: number): Flight {
-    return this.flightService.findOne(id);
+    return this.flightService.findOne(Number(id));
   }
 
   @Post()
   create(@Body() flight: Flight): number {
+    console.log('POST => ', flight)
     return this.flightService.create(flight);
   }
 
