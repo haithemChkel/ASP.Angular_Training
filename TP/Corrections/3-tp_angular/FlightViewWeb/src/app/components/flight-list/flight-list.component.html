@@ -5,7 +5,7 @@
   <div class="field">Arrival airport code</div>
 </div>
 <div class="flight-list">
-  <div *ngFor="let flight of this.flights$ | async" class="flight-container" [ngClass]="{'flight-with-delay' : flight.delay}">
-    <app-flight-item [flight]="flight" (selected)="this.onSelectedFlight($event)" (delete)="this.onDeleteFlight($event)"></app-flight-item>
+  <div *ngFor="let flight of this.flights$ | async" class="flight-container">
+    <app-flight-item [ngClass]="{'flight-with-delay' : flight.delay}" [flight]="flight" (selected)="this.onSelectedFlight($event)" (delete)="this.onDeleteFlight($event)"></app-flight-item>
   </div>
 </div>

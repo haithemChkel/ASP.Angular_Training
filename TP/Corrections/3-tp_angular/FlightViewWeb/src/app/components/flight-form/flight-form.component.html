@@ -1,54 +1,42 @@
-<form [formGroup]="flightForm" (ngSubmit)="onSubmit(flightForm.value)" *ngIf="this.vm$ | async as vm">
-
-  <div>
-    <label for="flightNumber">
-      Flight Number
-    </label>
-    <input id="flightNumber" type="text" formControlName="flightNumber">
+<form class="example-form" [formGroup]="flightForm" (ngSubmit)="onSubmit(flightForm.value)"
+  *ngIf="this.vm$ | async as vm">
+  <div class="error" *ngIf="!this.flightForm?.valid">
+    <ul>
+      <li *ngIf="!flightForm.controls.flightNumber.valid">Numéro de vol invalide</li>
+      <li *ngIf="!flightForm.controls.departureAirportCode.valid">Aéroport de départ invalide</li>
+      <li *ngIf="!flightForm.controls.arrivalAirportCode.valid">Aéroport d'arrivé invalide</li>
+      <li *ngIf="!flightForm.controls.dateAndTimeOfDeparture.valid">Date de départ invalide</li>
+      <li *ngIf="!flightForm.controls.dateAndTimeOfArrival.valid">Date d'arrivée invalide</li>
+      <li *ngIf="!flightForm.controls.price.valid">Prix invalide</li>
+    </ul>
   </div>
-
-  <div>
-    <label for="departureAirportCode">
-      Departure Airport Code
-    </label>
-    <input id="departureAirportCode" type="text" formControlName="departureAirportCode">
-  </div>
-
-  <div>
-    <label for="arrivalAirportCode">
-      Arrival Airport Code
-    </label>
-    <input id="arrivalAirportCode" type="text" formControlName="arrivalAirportCode">
-  </div>
-
-  <div>
-    <label for="dateAndTimeOfDeparture">
-      Date And Time Of Departure
-    </label>
-    <input id="dateAndTimeOfDeparture" type="datetime" formControlName="dateAndTimeOfDeparture">
-  </div>
-
-  <div>
-    <label for="dateAndTimeOfArrival">
-      Date And Time Of Arrival
-    </label>
-    <input id="dateAndTimeOfArrival" type="datetime" formControlName="dateAndTimeOfArrival">
-  </div>
-
-  <div>
-    <label for="delay">
-      Delay
-    </label>
+  <mat-form-field class="example-full-width">
+    <mat-label>Flight Number</mat-label>
+    <input matInput id="flightNumber" type="text" formControlName="flightNumber">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label> Departure Airport Code</mat-label>
+    <input matInput id="departureAirportCode" type="text" formControlName="departureAirportCode">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label> Arrival Airport Code</mat-label>
+    <input matInput id="arrivalAirportCode" type="text" formControlName="arrivalAirportCode">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label> Date And Time Of Departure</mat-label>
+    <input matInput id="dateAndTimeOfDeparture" type="datetime" formControlName="dateAndTimeOfDeparture">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label> Date And Time Of Arrival</mat-label>
+    <input matInput id="dateAndTimeOfArrival" type="datetime" formControlName="dateAndTimeOfArrival">
+  </mat-form-field>
+  <div class="example-full-width">
+    <mat-label> Delay</mat-label>
     <input id="delay" type="checkbox" formControlName="delay">
   </div>
-
-  <div>
-    <label for="price">
-      Price
-    </label>
-    <input id="price" type="number" formControlName="price">
-  </div>
-
-  <button class="button" type="submit">Save</button>
-
+  <mat-form-field class="example-full-width">
+    <mat-label> Price</mat-label>
+    <input matInput id="price" type="number" formControlName="price">
+  </mat-form-field>
+  <button mat-raised-button color="primary" class="button" type="submit">Save</button>
 </form>

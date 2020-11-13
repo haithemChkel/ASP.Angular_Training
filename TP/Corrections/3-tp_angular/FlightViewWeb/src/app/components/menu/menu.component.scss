@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+.mat-button {
+  width: 100%;
+  padding: 0 6px;
+  min-width: 0;
+  text-align: left;
+}
+
+span {
+  text-align: center;
+  padding: 0 6px;
+}
+
+.hover-menu {
+  &:hover {
+    @include mat-elevation(2);
+  }
+}

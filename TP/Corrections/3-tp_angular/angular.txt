@@ -111,3 +111,9 @@ TP Angular n°9 – HTTP
 ---------------------------------------------------------------------------------------------------------------
 Modifier le service FlightService afin que ce dernier puisse exploiter une API REST
 Modifier les composants en conséquence
+
+---------------------------------------------------------------------------------------------------------------
+TP Angular n°10 – Material
+---------------------------------------------------------------------------------------------------------------
+Ajouter le framework Angular Material 
+Utiliser les composant Material dans tous les composants de l'application.

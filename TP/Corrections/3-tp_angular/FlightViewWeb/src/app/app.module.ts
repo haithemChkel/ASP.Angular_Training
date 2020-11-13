@@ -10,6 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './components/menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatModule } from './mat.module';
+import { HeaderComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { MenuComponent } from './components/menu/menu.component';
     FlightDetailsComponent,
     FlightFormComponent,
     MenuComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatModule
   ],
   providers: [],
   bootstrap: [AppComponent]

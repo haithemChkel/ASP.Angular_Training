@@ -1,13 +1,10 @@
-<div>
-  <div class="field">
-    <a [routerLink]="['/flight', flight.id]">
-      {{ flight.id }}
-    </a></div>
+<mat-card>
+  <div class="field">{{ flight.id }}</div>
   <div class="field">{{flight.flightNumber}}</div>
   <div class="field">{{flight.departureAirportCode}}</div>
   <div class="field">{{flight.arrivalAirportCode}}</div>
   <div class="field">
-    <button class="button" (click)="this.onItemSelected($event)">Details</button>
-    <button class="button" (click)="this.onDelete($event)">Delete</button>
+    <button mat-raised-button color="primary" class="button" (click)="this.onItemSelected($event)">Details</button>
+    <button mat-raised-button color="accent" class="button" (click)="this.onDelete($event)">Delete</button>
   </div>
-</div>
+</mat-card>

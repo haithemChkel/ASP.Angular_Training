@@ -1,4 +1,9 @@
-<h1>Flight View Web</h1>
-<app-menu></app-menu>
-<!-- The routed views render in the <router-outlet>-->
-<router-outlet></router-outlet>
+<app-header></app-header>
+<mat-sidenav-container autosize>
+  <mat-sidenav class="mat-elevation-z2" mode="side" opened (mouseenter)="this.onMenuMouseOver()" (mouseleave)="this.onMenuMouseOut()">
+    <app-menu></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

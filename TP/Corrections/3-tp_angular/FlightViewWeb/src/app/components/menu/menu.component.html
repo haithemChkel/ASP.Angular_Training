@@ -1,6 +1,12 @@
-<nav>
-  <ul>
-    <li><a routerLink="/flights" routerLinkActive="active">Flights</a></li>
-    <li><a routerLink="/add" routerLinkActive="active">Add</a></li>
-  </ul>
-</nav>
+<section id="menu">
+  <div class="hover-menu">
+    <a routerLink="active" mat-button routerLink="/flights" routerLinkActive #linkActive="routerLinkActive">
+      <mat-icon>list</mat-icon>
+      <span>Flights</span>
+    </a>
+    <a routerLink="active" mat-button routerLink="/add" routerLinkActive #linkActive="routerLinkActive">
+      <mat-icon>add</mat-icon>
+      <span>Add</span>
+    </a>
+  </div>
+</section>

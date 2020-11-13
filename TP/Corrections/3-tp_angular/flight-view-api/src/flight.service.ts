@@ -9,7 +9,7 @@ export class FlightService {
   }
   buildDb(): Flight[] {
     console.log('buildDb....');
-    const keys = Array(100).keys();
+    const keys = Array(2).keys();
     const flights = [...Array.from(keys)].map(
       i => {
         return {
@@ -42,8 +42,8 @@ export class FlightService {
   create(flight: Flight): number {
     const newId = Math.max(...this.flights.keys()) + 1;
     flight.id = Number.isInteger(newId) && newId > 0 ?  newId : 1;
-    this.flights.set(newId, flight);
-    return newId;
+    this.flights.set(flight.id, flight);
+    return flight.id ;
   }
 
   update(flight: Flight): Flight {

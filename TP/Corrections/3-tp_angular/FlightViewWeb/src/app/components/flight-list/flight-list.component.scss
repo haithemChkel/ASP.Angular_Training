@@ -1,11 +1,5 @@
-.flight-list{
-  overflow-y:scroll;
-  overflow-x:hidden;
-  height:500px;
-}
 .flight-container{
   margin: 10px;
-  background-color: antiquewhite;
   &:hover {
     background-color: yellow;
     border-style: dotted;
@@ -13,6 +7,8 @@
 }
 
 .flight-with-delay{
-  background-color: red;
+  app-flight-item {
+    background-color: red;
+  }
 }
 
