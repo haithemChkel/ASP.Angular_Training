@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LiveCycleComponent } from './components/live-cycle/live-cycle.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LiveCycleComponent
   ],
   imports: [
     BrowserModule,
