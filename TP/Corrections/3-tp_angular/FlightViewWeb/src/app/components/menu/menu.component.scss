@@ -17,3 +17,7 @@ span {
     @include mat-elevation(2);
   }
 }
+
+.active{
+  @include mat-elevation(4);
+}
