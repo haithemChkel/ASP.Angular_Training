@@ -12,3 +12,4 @@ numbers.pipe(
     tap(x=> console.log('emit => ',x)),
     every(x  => x< 10 )
     ).subscribe(v => console.log(v));
+

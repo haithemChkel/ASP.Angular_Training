@@ -7,31 +7,48 @@ import { AfterContentInit, AfterViewChecked, Component, DoCheck, OnDestroy, OnIn
   styleUrls: ['./live-cycle.component.scss']
 })
 // tslint:disable-next-line: max-line-length
-export class LiveCycleComponent implements OnInit, AfterViewChecked, OnDestroy, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewInit {
+export class LiveCycleComponent implements OnInit, DoCheck, AfterViewChecked, OnDestroy, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewInit {
 
   show: boolean;
+  foods = ['Bacon', 'Lettuce', 'Tomatoes'];
 
-  constructor() { }
+  constructor() {
+    console.log('********** LiveCycleComponent constructor ...');
+  }
+
+
+  check(): void {
+    // console.log('********** LiveCycleComponent view checked ********');
+  }
+
+  ngOnInit(): void {
+    console.log('LiveCycleComponent ngOnInit ...');
+
+  }
+
+  ngDoCheck(): void {
+    console.log('********** LiveCycleComponent ngDoCheck ...');
+  }
+
+  addFood(food) {
+    //this.foods = [...this.foods, food];
+    this.foods.push(food);
+  }
+
   ngAfterViewChecked(): void {
-    console.log('ngAfterViewChecked ...');
+    console.log('**********LiveCycleComponent ngAfterViewChecked ...');
   }
   ngOnDestroy(): void {
-    console.log('ngOnDestroy ...');
-  }
-  ngDoCheck(): void {
-    console.log('ngDoCheck ...');
-  }
-  ngAfterContentInit(): void {
-    console.log('ngAfterContentInit ...');
-  }
-  ngAfterContentChecked(): void {
-    console.log('ngAfterContentChecked ...');
-  }
-  ngAfterViewInit(): void {
-    console.log('ngAfterViewInit ...');
-  }
-  ngOnInit(): void {
-    console.log('ngOnInit ...');
+    console.log('**********LiveCycleComponent ngOnDestroy ...');
   }
 
+  ngAfterContentInit(): void {
+    console.log('**********LiveCycleComponent ngAfterContentInit ...');
+  }
+  ngAfterContentChecked(): void {
+    console.log('**********LiveCycleComponent ngAfterContentChecked ...');
+  }
+  ngAfterViewInit(): void {
+    console.log('**********LiveCycleComponent ngAfterViewInit ...');
+  }
 }

@@ -1,3 +1,7 @@
-<p>live-cycle works!</p>
-<button (click)="this.show = !this.show">Toggle</button>
-<p *ngIf="this.show">Hello!!</p>
+<input #newFood type="text" placeholder="Enter a new food">
+<button (click)="addFood(newFood.value)">Add food</button>
+
+<app-child #1 [data]="foods">
+</app-child>
+
+<p>{{ check() }}</p>
