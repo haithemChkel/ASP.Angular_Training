@@ -8,8 +8,7 @@ export class FlightService {
     this.flights = new Map<number, Flight>(this.buildDb().map(x => [x.id, x]));
   }
   buildDb(): Flight[] {
-    console.log('buildDb....');
-    const keys = Array(2).keys();
+    const keys = Array(5).keys();
     const flights = [...Array.from(keys)].map(
       i => {
         return {

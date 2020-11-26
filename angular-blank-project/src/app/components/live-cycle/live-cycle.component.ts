@@ -17,13 +17,19 @@ export class LiveCycleComponent implements OnInit, DoCheck, AfterViewChecked, On
   }
 
 
-  check(): void {
-    // console.log('********** LiveCycleComponent view checked ********');
+  check(): boolean {
+    console.log('-----check --------********** LiveCycleComponent view checked ********');
+
+    return true;
   }
 
   ngOnInit(): void {
+    this.show = this.check();
     console.log('LiveCycleComponent ngOnInit ...');
 
+    setTimeout(() => {
+      this.foods = [...this.foods, '55555'];
+      }, 6000);
   }
 
   ngDoCheck(): void {
@@ -31,8 +37,8 @@ export class LiveCycleComponent implements OnInit, DoCheck, AfterViewChecked, On
   }
 
   addFood(food) {
-    //this.foods = [...this.foods, food];
-    this.foods.push(food);
+    this.foods = [...this.foods, food];
+    //this.foods.push(food);
   }
 
   ngAfterViewChecked(): void {

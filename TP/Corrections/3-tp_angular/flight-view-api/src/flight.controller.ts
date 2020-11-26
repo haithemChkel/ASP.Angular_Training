@@ -18,13 +18,11 @@ export class FlightController {
 
   @Post()
   create(@Body() flight: Flight): number {
-    console.log('POST => ', flight)
     return this.flightService.create(flight);
   }
 
   @Put(':id')
   update(@Param('id') id: number, @Body() flight: Flight): Flight {
-    console.log('id = ', id);
     if (this.flightService.exist(Number(id))) {
       return this.flightService.update(flight)
     } else {
@@ -34,7 +32,6 @@ export class FlightController {
 
   @Delete(':id')
   delete(@Param('id') id: number): boolean {
-    console.log('delete id = ', id);
     return this.flightService.delete(Number(id));
   }
 

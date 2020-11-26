@@ -21,6 +21,7 @@ export class ChildComponent implements OnInit, DoCheck, AfterViewChecked, OnDest
 
   ngOnInit(): void {
     console.log('---------ChildComponent ngOnInit ...');
+
   }
 
   ngDoCheck(): void {
