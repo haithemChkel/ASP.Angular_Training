@@ -52,7 +52,6 @@ export class FlightFormComponent implements OnInit {
       } else {
         await this.flightService.create(flight).toPromise();
       }
-      console.log('Go to flights');
       this.router.navigate(['/flights']);
     } else {
       alert(this.flightForm.status + 'form');

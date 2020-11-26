@@ -10,7 +10,7 @@ import { Flight } from '../models';
 })
 export class FlightService {
 
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = `${environment.apiUrl}/flight`;
   constructor(private readonly http: HttpClient) { }
 
   findAll(): Observable<Flight[]> {
@@ -18,7 +18,6 @@ export class FlightService {
   }
 
   findOne(flightId: number): Observable<Flight> {
-    console.log('call : ', this.apiUrl);
     return this.http.get<Flight>(`${this.apiUrl}/${flightId}`);
   }
 

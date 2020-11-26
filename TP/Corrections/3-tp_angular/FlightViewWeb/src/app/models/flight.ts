@@ -1,5 +1,5 @@
-// ng g interface ./models/Flight
-export interface Flight {
+
+export class Flight {
   id: number;
   flightNumber: string;
   departureAirportCode: string;
