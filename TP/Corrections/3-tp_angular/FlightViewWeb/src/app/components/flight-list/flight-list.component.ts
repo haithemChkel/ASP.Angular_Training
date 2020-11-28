@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EntityCollectionService } from 'projects/rx-state/src/public-api';
 import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { entities } from 'src/app/entities';
 import { Airport } from 'src/app/models/airport';
 import { Flight } from 'src/app/models/flight';
-import { EntityCollectionService } from 'src/app/services/entity-collection.service';
 
 @Component({
   selector: 'app-flight-list',
@@ -13,11 +14,10 @@ import { EntityCollectionService } from 'src/app/services/entity-collection.serv
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightListComponent implements OnInit {
-  flightEntityName = 'flight';
-  airportEntityName = 'airport';
+
   vm$ = combineLatest([
-    this.flightService.entityStore(this.flightEntityName),
-    this.airportService.entityStore(this.airportEntityName),
+    this.flightService.entityStore(entities.flight),
+    this.airportService.entityStore(entities.airport),
   ]).pipe(map(([flights, airports]) => ({ flights, airports })));
 
   selectedFlight: Flight;
@@ -26,12 +26,12 @@ export class FlightListComponent implements OnInit {
     private readonly flightService: EntityCollectionService<Flight>,
     private readonly airportService: EntityCollectionService<Airport>,
     private readonly router: Router,
-    private route: ActivatedRoute) { }
+    private readonly route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
     await combineLatest([
-      this.flightService.getAll(this.flightEntityName),
-      this.airportService.getAll(this.airportEntityName)
+      this.flightService.getAll(entities.flight),
+      this.airportService.getAll(entities.airport)
     ]).toPromise();
   }
 
@@ -41,10 +41,10 @@ export class FlightListComponent implements OnInit {
   }
 
   async onDeleteFlight(flight: Flight): Promise<void> {
-    await this.flightService.delete(this.flightEntityName, flight.id).toPromise();
+    await this.flightService.delete(entities.flight, flight.id).toPromise();
   }
 
   async refresh(): Promise<void> {
-    await this.flightService.getAll(this.flightEntityName).toPromise();
+    await this.flightService.getAll(entities.flight).toPromise();
   }
 }

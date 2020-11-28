@@ -4,17 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:3000',
-  entityHttpResourceUrls: {
-    flight: {
-      url: 'flight',
-      selectId: (x) => x.id
-    },
-    airport: {
-      url: 'airport',
-      selectId: (x) => x.airportCode
-    }
-  }
+  apiUrl: 'https://localhost:3000'
 };
 
 /*

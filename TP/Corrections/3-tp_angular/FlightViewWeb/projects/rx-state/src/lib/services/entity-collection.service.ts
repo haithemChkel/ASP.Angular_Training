@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { QueryParams, Update } from '../interfaces';
+import { StoreService } from '../state/store.service';
 import { DataService } from './data.service';
-import { QueryParams } from './interfaces/query-params';
-import { Update } from './interfaces/update';
-import { StoreService } from './store.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,15 +32,7 @@ export class EntityCollectionService<T> {
   }
 
   getById(entityName: string, key: number | string): Observable<T> {
-    console.log('call getById ', entityName, key);
-    return this.storeService.getById(entityName, key).pipe(
-      switchMap(entity => {
-        if (!entity) {
-          return this.dataService.getById(entityName, key);
-        }
-        return of(entity);
-      })
-    );
+    return this.dataService.getById(entityName, key);
   }
 
   getWithQuery(entityName: string, queryParams: QueryParams | string): Observable<T[]> {

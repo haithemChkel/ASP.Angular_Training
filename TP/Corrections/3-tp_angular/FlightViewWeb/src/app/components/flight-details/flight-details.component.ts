@@ -1,50 +1,46 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { combineLatest, of, Subscription } from 'rxjs';
-import { delay, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EntityCollectionService } from 'projects/rx-state/src/public-api';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { entities } from 'src/app/entities';
 import { Airport } from 'src/app/models/airport';
 import { Flight } from 'src/app/models/flight';
-import { EntityCollectionService } from 'src/app/services/entity-collection.service';
 
 @Component({
   selector: 'app-flight-details',
   templateUrl: './flight-details.component.html',
   styleUrls: ['./flight-details.component.scss']
 })
-export class FlightDetailsComponent implements OnInit, OnDestroy {
+export class FlightDetailsComponent implements OnInit {
 
-  flightEntityName = 'flight';
-  airportEntityName = 'airport';
 
-  departureAirport: Airport;
-  arrivalAirport: Airport;
-
-  @Input() flight: Flight;
-  private sub: Subscription;
+  vm$: Observable<{ flight: Flight, departureAirport: Airport, arrivalAirport: Airport }>;
 
   constructor(private readonly route: ActivatedRoute,
               private readonly flightService: EntityCollectionService<Flight>,
-              private readonly airportService: EntityCollectionService<Airport>) { }
+              private readonly airportService: EntityCollectionService<Airport>,
+              private readonly router: Router) { }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
-    this.sub = this.route.params
+    this.vm$ = this.route.params
       .pipe(
         map(params => +params.id),
-        switchMap(id => this.flightService.getById(this.flightEntityName, id)),
+        switchMap(id => this.flightService.getById(entities.flight, id)),
         mergeMap(f => combineLatest([
           of(f),
-          this.airportService.getById(this.airportEntityName, f.departureAirportCode),
-          this.airportService.getById(this.airportEntityName, f.arrivalAirportCode)
-        ]))
-      ).subscribe(([flight, departureAirport, arrivalAirport]) => {
-        this.flight = flight;
-        this.departureAirport = departureAirport as Airport;
-        this.arrivalAirport = arrivalAirport as Airport;
-      });
+          this.airportService.getAll(entities.airport)
+        ])),
+        map(([flight, airports]) => ({
+          flight,
+          departureAirport: airports.find(x => x.airportCode === flight.departureAirportCode),
+          arrivalAirport: airports.find(x => x.airportCode === flight.arrivalAirportCode)
+        })
+        )
+      );
   }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+  onEditFlight(flight: Flight): void {
+    this.router.navigate(['../../edit', flight.id], { relativeTo: this.route });
   }
 }

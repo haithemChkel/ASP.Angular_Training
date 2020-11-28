@@ -2,8 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, delay, map, timeout } from 'rxjs/operators';
-import { HttpMethods, QueryParams, RequestData } from './interfaces/query-params';
-import { Update } from './interfaces/update';
+import { HttpMethods, QueryParams, RequestData, Update } from '../interfaces';
 import { EntityRessourcesService } from './entity-ressources.service';
 
 export class DataServiceError {

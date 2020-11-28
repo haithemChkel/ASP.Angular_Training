@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EntityRessourcesService } from './entity-ressources.service';
-import { Dictionary } from './interfaces/dictionary';
-import { Update } from './interfaces/update';
+import { Dictionary } from '../interfaces/dictionary';
+import { Update } from '../interfaces/update';
+import { EntityRessourcesService } from '../services/entity-ressources.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,10 +41,13 @@ export class StoreService<T> {
     const selectfn = this.entityRessources.getSelectId(entityName);
     const storeState = this.store.value;
     const entityStoreState = storeState[entityName] ?? {};
-    console.log('upsertEntity> entityStoreState =>', entityStoreState);
-    const actualEntity = entityStoreState[selectfn(entity)];
+    let entityToUpdate: T | Partial<T>;
+    if (entity.hasOwnProperty('changes')){
+      entityToUpdate = (entity as  Update<T>).changes;
+    }
+    const actualEntity = entityStoreState[selectfn(entityToUpdate)];
     const newEntityStoreState = { ...entityStoreState };
-    newEntityStoreState[selectfn(entity)] = { ...actualEntity, ...entity };
+    newEntityStoreState[selectfn(entityToUpdate)] = { ...actualEntity, ...entityToUpdate };
     storeState[entityName] = newEntityStoreState;
     this.store.next({ ...storeState });
   }
