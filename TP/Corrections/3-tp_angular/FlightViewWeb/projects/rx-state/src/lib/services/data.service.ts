@@ -34,9 +34,7 @@ function extractMessage(sourceError: any): string | null {
     : null;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DataService<T> {
 
   protected delete404OK: boolean;

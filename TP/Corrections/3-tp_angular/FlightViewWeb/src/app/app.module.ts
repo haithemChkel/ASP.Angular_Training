@@ -12,6 +12,7 @@ import { AppCoreModule } from './modules/app-core';
 import { EntitiesConfig, ENTITIES_CONFIG } from 'projects/rx-state/src/public-api';
 import { environment } from 'src/environments/environment';
 import { entityHttpResourceUrls } from './entities';
+import { RxStateModule } from 'projects/rx-state/src/lib/rx-state.module';
 
 const APP_CONFIG: EntitiesConfig = {
   entitiesRessources: entityHttpResourceUrls,
@@ -31,7 +32,8 @@ const APP_CONFIG: EntitiesConfig = {
     HttpClientModule,
     BrowserAnimationsModule,
     MatModule,
-    AppCoreModule
+    AppCoreModule,
+    RxStateModule
   ],
   providers: [{ provide: ENTITIES_CONFIG, useValue: APP_CONFIG }],
   bootstrap: [AppComponent]

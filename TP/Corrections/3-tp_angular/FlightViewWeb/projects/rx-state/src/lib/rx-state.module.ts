@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { EventBusService, DataService, EntityCollectionService, EntityRessourcesService } from './services';
 
 
 
@@ -6,6 +7,7 @@ import { NgModule } from '@angular/core';
   declarations: [],
   imports: [
   ],
-  exports: []
+  exports: [],
+  providers: [EventBusService, DataService, EntityCollectionService, EntityRessourcesService]
 })
 export class RxStateModule { }

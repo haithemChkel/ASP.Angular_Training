@@ -6,9 +6,7 @@ import { StoreService } from '../state/store.service';
 import { DataService } from './data.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EntityCollectionService<T> {
 
   constructor(private readonly dataService: DataService<T>, private storeService: StoreService<T>) { }
