@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Flight } from '../../models';
+import { Flight } from '@app/models';
 
 @Component({
   selector: 'app-flight-item',

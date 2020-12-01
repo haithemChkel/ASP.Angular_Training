@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntityCollectionService } from 'projects/rx-state/src/lib/services';
+import { EntityCollectionService } from '@rx-state/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { entities } from 'src/app/entities';
-import { Flight } from 'src/app/models';
+import { entities } from '@app/entities';
+import { Flight } from '@app/models';
 
 @Component({
   selector: 'app-flight-form',

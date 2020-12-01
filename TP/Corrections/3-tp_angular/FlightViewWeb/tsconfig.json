@@ -16,9 +16,15 @@
       "dom"
     ],
     "paths": {
-      "@core": [
-        "dist/rx-state/rx-state"
+      "@app/*": [
+        "src/app/*"
       ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@rx-state/core": [
+        "src/../projects/rx-state/src/public-api"
+      ]
     }
   }
 }

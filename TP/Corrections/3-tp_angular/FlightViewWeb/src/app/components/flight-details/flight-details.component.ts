@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntityCollectionService } from 'projects/rx-state/src/public-api';
+import { EntityCollectionService } from '@rx-state/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { entities } from 'src/app/entities';
-import { Airport } from 'src/app/models/airport';
-import { Flight } from 'src/app/models/flight';
+import { entities } from '@app/entities';
+import { Airport, Flight } from '@app/models';
 
 @Component({
   selector: 'app-flight-details',

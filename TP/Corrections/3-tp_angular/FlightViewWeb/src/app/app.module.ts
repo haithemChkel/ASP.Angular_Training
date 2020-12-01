@@ -9,10 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './mat.module';
 import { HeaderComponent } from './components';
 import { AppCoreModule } from './modules/app-core';
-import { EntitiesConfig, ENTITIES_CONFIG } from 'projects/rx-state/src/public-api';
-import { environment } from 'src/environments/environment';
+import { EntitiesConfig, ENTITIES_CONFIG } from '@rx-state/core';
+import { environment } from '@env/environment';
 import { entityHttpResourceUrls } from './entities';
-import { RxStateModule } from 'projects/rx-state/src/lib/rx-state.module';
+import { RxStateModule } from '@rx-state/core';
 
 const APP_CONFIG: EntitiesConfig = {
   entitiesRessources: entityHttpResourceUrls,
