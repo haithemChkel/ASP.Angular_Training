@@ -4,7 +4,7 @@ import { EntityCollectionService } from '@rx-state/core';
 import { combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { entities } from '@app/entities';
-import { Airport, Flight } from '@app/models';
+import { Airport, Flight } from '@flight-view-models/models';
 
 @Component({
   selector: 'app-flight-list',

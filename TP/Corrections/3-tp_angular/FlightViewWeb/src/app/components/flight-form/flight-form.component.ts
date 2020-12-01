@@ -5,7 +5,7 @@ import { EntityCollectionService } from '@rx-state/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { entities } from '@app/entities';
-import { Flight } from '@app/models';
+import { Flight } from '@flight-view-models/models';
 
 @Component({
   selector: 'app-flight-form',

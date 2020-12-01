@@ -24,6 +24,9 @@
       ],
       "@rx-state/core": [
         "src/../projects/rx-state/src/public-api"
+      ],
+      "@flight-view-models/models": [
+        "src/../projects/flight-view-models/src/public-api"
       ]
     }
   }

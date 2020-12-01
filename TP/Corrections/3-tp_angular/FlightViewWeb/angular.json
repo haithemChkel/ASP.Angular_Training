@@ -131,6 +131,46 @@
           }
         }
       }
+    },
+    "FlightViewModels": {
+      "projectType": "library",
+      "root": "projects/flight-view-models",
+      "sourceRoot": "projects/flight-view-models/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/flight-view-models/tsconfig.lib.json",
+            "project": "projects/flight-view-models/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/flight-view-models/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/flight-view-models/src/test.ts",
+            "tsConfig": "projects/flight-view-models/tsconfig.spec.json",
+            "karmaConfig": "projects/flight-view-models/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/flight-view-models/tsconfig.lib.json",
+              "projects/flight-view-models/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "FlightViewWeb"
