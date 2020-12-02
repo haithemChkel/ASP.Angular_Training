@@ -13,11 +13,12 @@ import { EntitiesConfig, ENTITIES_CONFIG } from '@rx-state/core';
 import { environment } from '@env/environment';
 import { entityHttpResourceUrls } from './entities';
 import { RxStateModule } from '@rx-state/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const APP_CONFIG: EntitiesConfig = {
   entitiesRessources: entityHttpResourceUrls,
   apiEndpoint : environment.apiUrl
-
 };
 
 @NgModule({
@@ -33,9 +34,13 @@ const APP_CONFIG: EntitiesConfig = {
     BrowserAnimationsModule,
     MatModule,
     AppCoreModule,
-    RxStateModule
+    RxStateModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [{ provide: ENTITIES_CONFIG, useValue: APP_CONFIG }],
+  providers: [
+    { provide: ENTITIES_CONFIG, useValue: APP_CONFIG },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
