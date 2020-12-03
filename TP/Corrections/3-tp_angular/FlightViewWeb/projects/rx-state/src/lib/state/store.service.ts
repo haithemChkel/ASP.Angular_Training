@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Dictionary } from '../interfaces/dictionary';
 import { Update } from '../interfaces/update';
 import { EntityRessourcesService } from '../services/entity-ressources.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class StoreService<T> {
 
   initialState = {};
@@ -16,7 +14,9 @@ export class StoreService<T> {
   constructor(private readonly entityRessources: EntityRessourcesService) { }
 
   entityStore(entityName: string): Observable<T[]> {
-    return this.store.asObservable().pipe(map(store => {
+    return this.store.asObservable().pipe(
+      tap(console.log),
+      map(store => {
       const entityState = store[entityName];
       return entityState === undefined || entityState === null ? [] : Object.values(entityState);
     }));
@@ -41,10 +41,7 @@ export class StoreService<T> {
     const selectfn = this.entityRessources.getSelectId(entityName);
     const storeState = this.store.value;
     const entityStoreState = storeState[entityName] ?? {};
-    let entityToUpdate: T | Partial<T>;
-    if (entity.hasOwnProperty('changes')){
-      entityToUpdate = (entity as  Update<T>).changes;
-    }
+    const entityToUpdate = entity.hasOwnProperty('changes')  ? (entity as  Update<T>).changes : entity;
     const actualEntity = entityStoreState[selectfn(entityToUpdate)];
     const newEntityStoreState = { ...entityStoreState };
     newEntityStoreState[selectfn(entityToUpdate)] = { ...actualEntity, ...entityToUpdate };

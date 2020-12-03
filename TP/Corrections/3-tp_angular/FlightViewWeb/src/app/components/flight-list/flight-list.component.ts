@@ -1,49 +1,47 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntityCollectionService } from '@rx-state/core';
-import { combineLatest } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { entities } from '@app/entities';
-import { Airport, Flight } from '@flight-view-models/models';
+import { EventBusService } from '@rx-state/core';
+import { Flight } from '@flight-view-models/models';
+import { FlightActions } from '@app/actions';
+import { FlightEffectsService } from '@app/effects/flight.effects';
+import { FlightListView, FlightListViewModel } from './flight-list.view-model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-flight-list',
   templateUrl: './flight-list.component.html',
   styleUrls: ['./flight-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [FlightListViewModel]
 })
 export class FlightListComponent implements OnInit {
 
-  vm$ = combineLatest([
-    this.flightService.entityStore(entities.flight),
-    this.airportService.entityStore(entities.airport),
-  ]).pipe(map(([flights, airports]) => ({ flights, airports })));
-
-  selectedFlight: Flight;
+  vm$: Observable<FlightListView> = this.vm.vm$;
 
   constructor(
-    private readonly flightService: EntityCollectionService<Flight>,
-    private readonly airportService: EntityCollectionService<Airport>,
     private readonly router: Router,
-    private readonly route: ActivatedRoute) { }
+    private readonly route: ActivatedRoute,
+    private readonly eventBusService: EventBusService,
+    public readonly flightEffectsService: FlightEffectsService,
+    private readonly vm: FlightListViewModel
+  ) { }
 
-  async ngOnInit(): Promise<void> {
-    await combineLatest([
-      this.flightService.getAll(entities.flight),
-      this.airportService.getAll(entities.airport)
-    ]).toPromise();
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.eventBusService.emit({ name: FlightActions.getFlights });
+    }, 1);
   }
 
   onSelectedFlight(flight: Flight): void {
-    this.selectedFlight = flight;
     this.router.navigate(['../flight', flight.id], { relativeTo: this.route });
   }
 
-  async onDeleteFlight(flight: Flight): Promise<void> {
-    await this.flightService.delete(entities.flight, flight.id).toPromise();
+  onDeleteFlight(flight: Flight): void {
+    this.eventBusService.emit<number>({ name: FlightActions.deleteFlight, value: flight.id });
   }
 
-  async refresh(): Promise<void> {
-    await this.flightService.getAll(entities.flight).toPromise();
+  refresh(): void {
+    this.eventBusService.emit<unknown>({ name: FlightActions.getFlights });
   }
 }

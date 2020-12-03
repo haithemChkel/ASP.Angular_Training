@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntityCollectionService } from '@rx-state/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
-import { entities } from '@app/entities';
 import { Airport, Flight } from '@flight-view-models/models';
+import { AirportService, FlightService } from '@app/services';
 
 @Component({
   selector: 'app-flight-details',
@@ -17,18 +16,18 @@ export class FlightDetailsComponent implements OnInit {
   vm$: Observable<{ flight: Flight, departureAirport: Airport, arrivalAirport: Airport }>;
 
   constructor(private readonly route: ActivatedRoute,
-              private readonly flightService: EntityCollectionService<Flight>,
-              private readonly airportService: EntityCollectionService<Airport>,
+              private readonly flightService: FlightService,
+              private readonly airportService: AirportService,
               private readonly router: Router) { }
 
   ngOnInit(): void {
     this.vm$ = this.route.params
       .pipe(
         map(params => +params.id),
-        switchMap(id => this.flightService.getById(entities.flight, id)),
+        switchMap(id => this.flightService.getById(id)),
         mergeMap(f => combineLatest([
           of(f),
-          this.airportService.getAll(entities.airport)
+          this.airportService.getAll()
         ])),
         map(([flight, airports]) => ({
           flight,

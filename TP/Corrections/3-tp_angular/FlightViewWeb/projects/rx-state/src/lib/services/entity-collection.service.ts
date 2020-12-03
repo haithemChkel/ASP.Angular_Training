@@ -1,48 +1,61 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { QueryParams, Update } from '../interfaces';
 import { StoreService } from '../state/store.service';
 import { DataService } from './data.service';
 
 
-@Injectable()
-export class EntityCollectionService<T> {
+export abstract class EntityCollectionService<T> {
 
-  constructor(private readonly dataService: DataService<T>, private storeService: StoreService<T>) { }
-
-  entityStore(entityName: string): Observable<T[]> {
-    return this.storeService.entityStore(entityName);
+  constructor(public entityName: string,
+              private readonly dataService: DataService<T>,
+              private storeService: StoreService<T>) {
   }
 
-  add(entityName: string, entity: T): Observable<T> {
-    return this.dataService.add(entityName, entity).pipe(tap(() => this.storeService.upsertEntity(entityName, entity)));
+  entityStore(): Observable<T[]> {
+    return this.storeService.entityStore(this.entityName);
   }
 
-  delete(entityName: string, key: number | string): Observable<number | string> {
-    return this.dataService.delete(entityName, key).pipe(tap(() => this.storeService.deleteEntity(entityName, key)));
-  }
-
-  getAll(entityName: string): Observable<T[]> {
-    return this.dataService.getAll(entityName).pipe(
-      tap(list => this.storeService.emit(entityName, list))
+  add(entity: T): Observable<T> {
+    return this.dataService.add(this.entityName, entity)
+      .pipe(
+        tap(() => this.storeService.upsertEntity(this.entityName, entity))
       );
   }
 
-  getById(entityName: string, key: number | string): Observable<T> {
-    return this.dataService.getById(entityName, key);
+  delete(key: number | string): Observable<number | string> {
+    return this.dataService.delete(this.entityName, key)
+      .pipe(
+        tap(() => this.storeService.deleteEntity(this.entityName, key))
+      );
   }
 
-  getWithQuery(entityName: string, queryParams: QueryParams | string): Observable<T[]> {
-    return this.dataService.getWithQuery(entityName, queryParams).pipe(tap(list => this.storeService.emit(entityName, list)));
+  getAll(): Observable<T[]> {
+    return this.dataService.getAll(this.entityName).pipe(
+      tap(list => this.storeService.emit(this.entityName, list))
+    );
   }
 
-  update(entityName: string, update: Update<T>): Observable<T> {
-    return this.dataService.update(entityName, update).pipe(tap(() => this.storeService.upsertEntity(entityName, update)));
+  getById(key: number | string): Observable<T> {
+    return this.dataService.getById(this.entityName, key);
   }
 
-  // Important! Only call if the backend service supports upserts as a POST to the target URL
-  upsert(entityName: string, entity: T): Observable<T> {
-    return this.dataService.upsert(entityName, entity).pipe(tap(() => this.storeService.upsertEntity(entityName, entity)));
+  getWithQuery(queryParams: QueryParams | string): Observable<T[]> {
+    return this.dataService.getWithQuery(this.entityName, queryParams)
+      .pipe(tap(list => this.storeService.emit(this.entityName, list))
+      );
+  }
+
+  update(update: Update<T>): Observable<T> {
+    return this.dataService.update(this.entityName, update)
+      .pipe(
+        tap(() => this.storeService.upsertEntity(this.entityName, update))
+      );
+  }
+
+  upsert(entity: T): Observable<T> {
+    return this.dataService.upsert(this.entityName, entity)
+      .pipe(tap(() => this.storeService.upsertEntity(this.entityName, entity))
+      );
   }
 }

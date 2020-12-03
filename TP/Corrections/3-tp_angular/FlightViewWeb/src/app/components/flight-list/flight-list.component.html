@@ -1,4 +1,6 @@
-<div *ngIf="(this.vm$ | async) as vm">
+<div *ngIf="this.flightEffectsService.getFlightsEffects$ | async"></div>
+<div *ngIf="this.flightEffectsService.deleteFlightEffects$ | async"></div>
+<div>
   <div class="flight-list-header">
     <div class="field">Id</div>
     <div class="field">Flight number</div>
@@ -6,9 +8,10 @@
     <div class="field">Arrival airport code</div>
     <button mat-raised-button color="accent" class="button" type="submit" (click)="refresh()"><mat-icon>refresh</mat-icon></button>
   </div>
-  <div class="flight-list">
+  <div class="flight-list" *ngIf="(this.vm$ | async) as vm; else loading">
     <div *ngFor="let flight of vm.flights" class="flight-container">
       <app-flight-item [ngClass]="{'flight-with-delay' : flight.delay}" [flight]="flight" (selected)="this.onSelectedFlight($event)" (delete)="this.onDeleteFlight($event)"></app-flight-item>
     </div>
   </div>
 </div>
+<ng-template #loading>Loading ...</ng-template>

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EntityCollectionService } from '@rx-state/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { entities } from '@app/entities';
 import { Flight } from '@flight-view-models/models';
+import { FlightService } from '@app/services';
+import { EventBusService } from '@rx-state/core';
+import { FlightActions } from '@app/actions';
+import { FlightEffectsService } from '@app/effects/flight.effects';
 
 @Component({
   selector: 'app-flight-form',
@@ -18,9 +20,11 @@ export class FlightFormComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly flightService: EntityCollectionService<Flight>,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute) {
+    private readonly flightService: FlightService,
+    private readonly route: ActivatedRoute,
+    private readonly eventBusService: EventBusService,
+    public readonly flightEffectsService: FlightEffectsService
+  ) {
     this.flightForm = this.formBuilder.group({
       id: undefined,
       flightNumber: [undefined, Validators.required],
@@ -37,23 +41,18 @@ export class FlightFormComponent implements OnInit {
     this.vm$ = this.route.params
       .pipe(
         map(params => +params.id),
-        switchMap(id => Number.isInteger(id) ? this.flightService.getById(entities.flight, id) : of(true)),
+        switchMap(id => Number.isInteger(id) ? this.flightService.getById(id) : of(true)),
         tap(f => {
-          if (typeof  f === 'object' && f.hasOwnProperty('flightNumber')) {
+          if (typeof f === 'object' && f.hasOwnProperty('flightNumber')) {
             this.flightForm.setValue(f);
           }
         })
       );
   }
 
-  async onSubmit(flight: Flight): Promise<any> {
+  onSubmit(flight: Flight): void {
     if (this.flightForm.valid) {
-      if (flight.id !== undefined) {
-        await this.flightService.update(entities.flight, { id: flight.id, changes: flight }).toPromise();
-      } else {
-        await this.flightService.add(entities.flight, flight).toPromise();
-      }
-      this.router.navigate(['']);
+      this.eventBusService.emit<Flight>({ name: FlightActions.saveFlight, value: flight });
     } else {
       alert(this.flightForm.status + 'form');
     }
