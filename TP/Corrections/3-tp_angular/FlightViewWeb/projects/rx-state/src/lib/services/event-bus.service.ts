@@ -1,3 +1,7 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
+
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';

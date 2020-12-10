@@ -1,3 +1,7 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
+
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { QueryParams, Update } from '../interfaces';

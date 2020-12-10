@@ -1,3 +1,6 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
 import { InjectionToken } from '@angular/core';
 
 export interface EntityRessource

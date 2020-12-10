@@ -1,3 +1,7 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
+
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';

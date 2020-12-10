@@ -1,3 +1,7 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
+
 import { Inject, Injectable } from '@angular/core';
 import { EntitiesConfig, ENTITIES_CONFIG } from '../entities-config.token';
 

@@ -1,3 +1,7 @@
+// ********************************************************
+// ************ DO NOT USE IN PRODUCTION ******************
+// ********************************************************
+
 import { NgModule } from '@angular/core';
 import { EventBusService, DataService, EntityRessourcesService } from './services';
 import { StoreService } from './state';
